@@ -45,3 +45,4 @@ Failure detection 是使用本地的Gossip狀態與紀錄判斷另一個Node是�
 Gossip程序追蹤狀態訊息(包含直接的一手訊息以及間接收到的第二手、第三手訊息)。 Cassandra計算帳戶網路效能、工作負擔、歷史狀態來精準的標記斷線的Node。每個Node在Gossip時會記錄Node間的回應時間。設定phi_convict_threshold來調整failure detection的敏銳度，數值越低則標記未回應的Node的機率越高，數值越高則降低被標記為斷線的機率。
 
 硬體失效或是網路問題都可能使Node斷線，Node斷線可能都是過渡性的，而非長久性的斷線，其他的Node會嘗試重新建立連線。管理員必須使用nodetool-utility或是OpsCenter才能將Node移出cluster。
+
