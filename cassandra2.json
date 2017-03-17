@@ -1,0 +1,205 @@
+[
+    {
+        "Id": "d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c",
+        "Created": "2017-03-17T13:46:44.9955789Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "cassandra",
+            "-f"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 26231,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2017-03-17T13:46:46.6317487Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:912969144d8a481fadd9f3769ee12a98146a0f35a3bea6a3535fe41084831dd6",
+        "ResolvConfPath": "/var/lib/docker/containers/d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c/hostname",
+        "HostsPath": "/var/lib/docker/containers/d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c/hosts",
+        "LogPath": "/var/lib/docker/containers/d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c/d812f2600d588e3ba85b99c6626f5c2fca1dc2697c424f57eefdbb2cb9c5480c-json.log",
+        "Name": "/cassandra2",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                50,
+                120
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Name": "aufs",
+            "Data": null
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "0d23d67bf0f92068d281719b2c03f75dcae8f45f3964e962748771a511010c74",
+                "Source": "/var/lib/docker/volumes/0d23d67bf0f92068d281719b2c03f75dcae8f45f3964e962748771a511010c74/_data",
+                "Destination": "/var/lib/cassandra",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "d812f2600d58",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "7000/tcp": {},
+                "7001/tcp": {},
+                "7199/tcp": {},
+                "9042/tcp": {},
+                "9160/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "CASSANDRA_SEEDS=172.17.0.2",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.7",
+                "GPG_KEYS=514A2AD631A57A16DD0047EC749D6EEC0353B12C \tA26E528B271F19B9E5D8E19EA278B781FE4B2BDA",
+                "CASSANDRA_VERSION=3.10",
+                "CASSANDRA_CONFIG=/etc/cassandra"
+            ],
+            "Cmd": [
+                "cassandra",
+                "-f"
+            ],
+            "ArgsEscaped": true,
+            "Image": "cassandra:3.10",
+            "Volumes": {
+                "/var/lib/cassandra": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "8b9be9669e96934bdfedff0eab4ac7bee1b6d0af7b9ae9b9cd9609c54a574d3d",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "7000/tcp": null,
+                "7001/tcp": null,
+                "7199/tcp": null,
+                "9042/tcp": null,
+                "9160/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/8b9be9669e96",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "c8dd2774ddae56f05e83b8abbca3b1a5846dc597c327e61bac34c292eba016fa",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.3",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:03",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "0f5b6878e4cd7333cfe87421f096eb85f723252fe31fcc058c9a834eafb9b4f8",
+                    "EndpointID": "c8dd2774ddae56f05e83b8abbca3b1a5846dc597c327e61bac34c292eba016fa",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:03"
+                }
+            }
+        }
+    }
+]

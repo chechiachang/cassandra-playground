@@ -1,0 +1,259 @@
+[
+    {
+        "Id": "218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225",
+        "Created": "2017-02-23T18:48:05.4753201Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "cassandra",
+            "-f"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 25195,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2017-03-17T13:43:53.7825906Z",
+            "FinishedAt": "2017-03-17T13:33:51.2366368Z"
+        },
+        "Image": "sha256:cb079b740fd9e42555d681748af420cb15c86afb7a1c6b0b8c07e19405ff2f5c",
+        "ResolvConfPath": "/var/lib/docker/containers/218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225/hostname",
+        "HostsPath": "/var/lib/docker/containers/218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225/hosts",
+        "LogPath": "/var/lib/docker/containers/218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225/218b347d91203239745f00a70590f3436b8e2c72a18faa570b2735bffee58225-json.log",
+        "Name": "/cassandra",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/c/Users/davidchang/workspace/docker/volume/cassandra:/var/lib/cassandra"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "7000/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "7000"
+                    }
+                ],
+                "7001/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "7001"
+                    }
+                ],
+                "7199/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "7199"
+                    }
+                ],
+                "9042/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "9042"
+                    }
+                ],
+                "9160/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "9160"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                46,
+                150
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Name": "aufs",
+            "Data": null
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/c/Users/davidchang/workspace/docker/volume/cassandra",
+                "Destination": "/var/lib/cassandra",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "218b347d9120",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "7000/tcp": {},
+                "7001/tcp": {},
+                "7199/tcp": {},
+                "9042/tcp": {},
+                "9160/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.7",
+                "GPG_KEYS=514A2AD631A57A16DD0047EC749D6EEC0353B12C \tA26E528B271F19B9E5D8E19EA278B781FE4B2BDA",
+                "CASSANDRA_VERSION=3.10",
+                "CASSANDRA_CONFIG=/etc/cassandra"
+            ],
+            "Cmd": [
+                "cassandra",
+                "-f"
+            ],
+            "Image": "cassandra",
+            "Volumes": {
+                "/var/lib/cassandra": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "1020adca0cc62cd89fb894cd4527cf8b9592c010e8b7579a2de3dd143a0179f3",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "7000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "7000"
+                    }
+                ],
+                "7001/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "7001"
+                    }
+                ],
+                "7199/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "7199"
+                    }
+                ],
+                "9042/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "9042"
+                    }
+                ],
+                "9160/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "9160"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/1020adca0cc6",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "f4a445549c37c5121143e51939cbe9afd3b01d6f0d81849035b05e87c48c0fba",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "0f5b6878e4cd7333cfe87421f096eb85f723252fe31fcc058c9a834eafb9b4f8",
+                    "EndpointID": "f4a445549c37c5121143e51939cbe9afd3b01d6f0d81849035b05e87c48c0fba",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02"
+                }
+            }
+        }
+    }
+]
