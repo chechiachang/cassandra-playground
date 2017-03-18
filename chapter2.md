@@ -68,32 +68,30 @@ Cassandra中資料分配(Data distribution)與複製(Replication)為一體兩面
 最小化新增或移除Node時的重新組織(reorganization)。Consistent hashing依照分割鍵(Partition key)分割資料。
 
  <table>
-    <th>
-        <td>name</td>
-        <td>age</td>
-        <td>car</td>
-        <td>gender</td>
-    </th>
     <tr>
-        <td>
-            <td>david</td>
-            <td>29</td>
-            <td>yamaha</td>
-            <td>M</td>
-        </td>
-        <td>
-            <td>kim</td>
-            <td>29</td>
-            <td>sym</td>
-            <td>F</td>
-        </td>
+        <th>name</th>
+        <th>age</th>
+        <th>car</th>
+        <th>gender</th>
+    </tr>
+    <tr>
+        <td>david</td>
+        <td>29</td>
+        <td>yamaha</td>
+        <td>M</td>
+    </tr>
+    <tr>
+        <td>kim</td>
+        <td>29</td>
+        <td>sym</td>
+        <td>F</td>
     </tr>
  </table>
  <table>
-    <th>
-        <td>Partition key</td>
-        <td>Murmur3 hash value</td>
-    </th>
+    <tr>
+        <th>Partition key</th>
+        <th>Murmur3 hash value</th>
+    </tr>
     <tr>
         <td>david</td>
         <td>-2245462676723223822</td>
