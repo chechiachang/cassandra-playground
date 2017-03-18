@@ -1,5 +1,5 @@
-# My Awesome Book
+# Cassandra 
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+Cassandra是一個可以巨量擴展的NoSQL資料庫，適合管理大量的結構性或非結構性資料，並分散在多個Data center中。Cassandra具有高存取性、線性擴展、操作簡潔、無單點故障(Single Point of Failure)、動態資料結構提供使用彈性與快速回應。
 
-http://docs.datastax.com/en/archived/cassandra/2.0/index.html
+http://docs.datastax.com/en/cassandra/3.0/
