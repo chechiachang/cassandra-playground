@@ -164,3 +164,19 @@ Murmur3Partitioner、RandomPartitionaer都使用token依照區塊平均分配資
 ### Snitches
 
 Snitch判斷Node屬於哪個datacenter以及rack，告訴Cassandra網路分布(Topology)使得請求傳遞更有效率，並允許Cassandra考慮實體分布圖，將機器群組為datacenter與rack。更精確地說，Snitch提供資訊讓複製策略分配副本。 All nodes must return to the same rack and datacenter。Cassandra盡量避免相同rack上有多個複本。
+
+* Dynamic snitching
+預設所有snitch都會使用dynamic snitch layer來監控讀取延遲，並從效能低落的Node轉移請求
+* Simple Snitch
+用在單一datacenter
+* RackInferringSnitch
+以rack與datacenter判斷距離，將Node的ip的第二個與第三個八位元ˋ為datacenter與rack。
+* PropertyFileSnitch
+以rack與datacenter判斷距離，並使用cassandra-topology.properties內的Network設定。可以定義detacenter的名字。Cluster中的每個Node都需要使用者個properties。
+* GossipingPropertyFileSnitch
+推薦在生產環境使用的模式。使用Node本地的cassandra-rackdc.properties，並以Gossip與其他Node交換此資訊。
+* Ec2Snitch
+單一區域內AWS Ec2 Custer專用
+* Ec2MultiRegionSnitch
+* GoogleCloudSnitch
+* CloudstackSnitch
