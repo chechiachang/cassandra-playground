@@ -150,13 +150,15 @@ Murmur3Partitioner、RandomPartitionaer都使用token依照區塊平均分配資
 
 若使用vnode，則不需要計算token，若沒有使用vnode，則需要計算token並在cassandra.yaml中定義initial_token參數。不同分割器彼此不兼容，不同分割器產生的資料也不易轉換。
 
-** Murmur3Partitioner有3-5倍的效能。使用MurmurHash函數，函數由token產生64位元的雜湊碼，可能範圍為-2^63到2^63-1。在新建的Cluster使用Murmur3Partitioner，不同分割器產生的資料也不易轉換。
-** RandomPartitioner使用cryptographic hash(MD5 hash)，會花較多時間。範圍為0到2^127-1。可向前相容其他分割器的資料。
-** ByteOrderedParittioner依照鍵值的位元碼依序排列資料，提供分割鍵的排序。例如可以使用16位元表示對照字母將A對應為41。因為鍵值有排序，類似傳統的index，可掃描資料列的特定排序部位並存取資料，可向前相容其他分割器的資料。存在幾個缺陷：
+* Murmur3Partitioner有3-5倍的效能。使用MurmurHash函數，函數由token產生64位元的雜湊碼，可能範圍為-2^63到2^63-1。在新建的Cluster使用Murmur3Partitioner，不同分割器產生的資料也不易轉換。
 
-*** 附載均衡困難
-*** 連續寫入造成負載集中(Hot spot)
-*** 多表格的負載不均
+* RandomPartitioner使用cryptographic hash(MD5 hash)，會花較多時間。範圍為0到2^127-1。可向前相容其他分割器的資料。
+
+* ByteOrderedParittioner依照鍵值的位元碼依序排列資料，提供分割鍵的排序。例如可以使用16位元表示對照字母將A對應為41。因為鍵值有排序，類似傳統的index，可掃描資料列的特定排序部位並存取資料，可向前相容其他分割器的資料。存在幾個缺陷：
+
+1. 附載均衡困難
+2. 連續寫入造成負載集中(Hot spot)
+3. 多表格的負載不均
 
 
 ### Snitches
