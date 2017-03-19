@@ -125,9 +125,44 @@ Cassandra supports immediate deletion through the DROP KEYSPACE and DROP TABLE s
 
 ### 資料讀取
 
+Cassandra透過以下步驟讀取不同狀態與位置的資料：
+* 檢查memTable
+* 檢查row cache(有啟用的話)
+* 檢查Bloom filter
+* 檢查分割鍵快取(如果有啟用的話)
+** 有找到partition key，就直接到compression offset map
+** 沒有找到就檢查Partition summary，再到partition index
+* 透過compression offset map找到資料的位置，讀取SSTable
 
 
+##### memTable
+如果memTable中有資料，則會取出，並與SSTable的資料比較
+
+##### Row Cache
+
+-Row cache是為write-intensive指令。啟用時會將部分-
+
+LRU(Least-recently-used)的資料會儲存在Row cache中，讓常用資料備查找時省去兩步驟的查找。
+
+##### Bloom filter
+
+每個SSTable都有對應的一個Bloom filter，可以判斷對應的SSTable沒有該筆資料的機率，減少不必要的查找、加速流程，然而由於bloom filter是以機率推估，有可能產生假陽性。如果bloom filter後都找不到對應的SSTable，會去尋找partition key cache。
+
+##### Partition key cache
+
+將partition key存在快取中，如果partition key cache找到，便會跳過partition summary直接到compression offset map中找到確定含有資料的comporessed block。
+
+##### Partition Summary
+
+將partition index的部分樣本儲存存在記憶體中，例如20筆index一個區段採樣，藉著先讀取partition summary可以確定區要的index在partition index的約略位置，加速partition index上的查找。
+
+##### Partition index
+
+將所有的parition key與其對應的comporession offet資訊紀錄在硬碟上，，一次查找可以找到compression offset map對應的comporessed block。
+
+##### compression offset map
+
+儲存實際的pointer，指向資料的確定位置。可經由partition kwy cache與partition index，定位compression offset來取用
 
 
-
-
+# Data consistency
