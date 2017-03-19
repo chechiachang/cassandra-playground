@@ -87,3 +87,47 @@ Cassandra使用upsert處理新增，新增資料列時不檢查該主鍵的資�
 在讀取時Cassandra也會進行Compaction，當讀取資料時也會需要取出各版本資料並比對，這時便一併進行Compaction，不會影響讀取。
 
 ### 資料刪除
+
+Cassandra使用upsert處理刪除，被刪除的資料會標上墓碑(tombstone)，墓碑依循寫入流程並被寫入SSTable。墓碑內建失效時間(expiration date/time)，compaction程序中會將超過失效時間的墓碑資料移除。使用者可以手動標記生效時間(time-to-live)到資料列(row)或資料欄(column)，當過期時會被Cassandra標記墓碑。
+
+##### 分散式系統的刪除
+
+多Node的Cluster中，不同Node之中儲存了多個複本，這有助於防止資料遺失，但卻讓刪除變得複雜。一個Node收到刪除指令，並把資料標記墓碑時，會將墓碑的訊息通知其他Node，然而如果其他Node有離線的Node，這個離線Node自然不會收到墓碑的訊息，資料仍然維持未刪除(pre-delete)的版本，當其他在線Node都刪除資料後，離線Node上線時的回復程序，又會將這筆資料，從剛上線的Node散佈到其他已刪除資料的Node。這種被刪除但卻保存下來的資料稱為殭屍資料(Zombie)。
+
+為了避免殭屍資料，Cassandra給每個刪除一個grace period，讓刪除時未回應的離線Node有時間先回復，並正常處理墓碑。在grace period時，如果客戶更新墓碑資料，Cassandra會複寫墓碑；如果客戶讀取墓碑資料，Cassandra會忽視墓碑資料，並試圖尋找其他複本。
+
+當Node回覆後，Cassandra使用hinted handoff回放Node錯過的資料庫變更，grace period中墓碑資料不會被更新。然而當grace period之後，墓碑資料還是會被更新，而錯過刪除指令。
+
+grace period後，Cassandra會在Compaction中刪除墓碑資料。grace period可在資料表(table)中設定gc_grace_period，預設值是864000秒(10 天)。
+
+墓碑上標記的失效時間=墓碑的建立時間+gc_grace_period。
+Cassandra支援批次資料新增及更新，但這同時會增加回復節點時回放時的危險，節點回復後的回放，批次寫入不會變更還在grace period中的墓碑資料。
+單節點Cluster(single-node cluster)中可將gc_grace_period設為0。
+
+To completely prevent the reappearance of zombie records, run nodetool repair on a node after it recovers, and on each table every gc_grace_seconds.
+If all records in a table are given a TTL at creation, and all are allowed to expire and not deleted manually, it is not necessary to run nodetool repair for that table on a regular basis.
+If you use the SizeTieredCompactionStrategy or DateTieredCompactionStrategy, you can delete tombstones immediately by manually starting the compaction process.
+CAUTION:
+If you force compaction, Cassandra may create one very large SSTable from all the data. Cassandra will not trigger another compaction for a long time. The data in the SSTable created during the forced compaction can grow very stale during this long period of non-compaction.
+Cassandra allows you to set a default_time_to_live property for an entire table. Columns and rows marked with regular TTLs are processed as described above; but when a record exceeds the table-level TTL, Cassandra deletes it immediately, without tombstoning or compaction.
+Cassandra supports immediate deletion through the DROP KEYSPACE and DROP TABLE statements.
+
+### 索引的儲存與更新
+
+由於資料是依照主鍵的分割鍵，分配到不同節點的不同分割上，所以使用一個主鍵來查詢(query)，只需要讀取一個節點。非主鍵(non-primary key)無關資料分割與分配，所以使用非主鍵查詢會需要讀取所有Node，造成不被允許的嚴重讀取延遲。
+
+次級索引(Secondary Index)提供非主鍵的資瞭查找，可以使用資料表的欄位(coumn)建立。這些索引透過背景程序儲存在本地節點地的隱藏資料表。使用主鍵搭配次級索引可以快速查找資料，只需讀取一個節點。單獨使用次級索引查找會產生嚴重讀取延遲，使用時必須在query option中設定Allow Filtering；不建議在生產環境使用。
+
+次級索引並不保證索引是沒問題的，所以可以直接使用，但有更好的解決方案，像是建立materialized view或使用次級索引作為主鍵新建一個資料表。
+
+如同關聯資料庫，索引需要維持更新，欄位被更新時索引會一併被更新。 If the old column value still exists in the memtable, which typically occurs when updating a small set of rows repeatedly, Cassandra removes the corresponding obsolete index entry; otherwise, the old entry remains to be purged by compaction. If a read sees a stale index entry before compaction purges it, the reader thread invalidates it.
+
+
+### 資料讀取
+
+
+
+
+
+
+
