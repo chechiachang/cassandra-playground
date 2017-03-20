@@ -1,0 +1,136 @@
+CQL
+===
+
+# Create Keyspace
+
+$ create keyspace demodb with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+### Coordinator Node
+
+INFO  [Native-Transport-Requests-1] 2017-03-20 14:34:36,459 MigrationManager.java:303 - Create new Keyspace: KeyspaceMetadata{name=demodb, params=KeyspaceParams{durable_writes=true, replication=ReplicationParams{class=org.apache.cassandra.locator.SimpleStrategy, replication_factor=1}}, tables=[], views=[], functions=[], types=[]}
+
+### Other Node
+
+INFO  [IndexSummaryManager:1] 2017-03-20 14:35:56,464 IndexSummaryRedistribution.java:75 - Redistributing index summaries
+
+$ use demodb;
+
+# Create Table
+
+Create table employees(
+	id uuid,
+	country varchar,
+	gender varchar,
+	age int,
+	name varchar,
+	primary key(id, name)
+);
+
+Create table employees_by_country(
+	id uuid,
+	country varchar,
+	gender varchar,
+	age int,
+	name varchar,
+	primary key(country, name)
+);
+
+### Coordinator
+
+INFO  [Native-Transport-Requests-1] 2017-03-20 14:51:00,173 MigrationManager.java:343 - Create new table: org.apache.cassandra.config.CFMetaData@5d27303[cfId=a1ea6b90-0d7c-11e7-af0e-6d2c86545d91,ksName=demodb,cfName=employees,flags=[COMPOUND],params=TableParams{comment=, read_repair_chance=0.0, dclocal_read_repair_chance=0.1, bloom_filter_fp_chance=0.01, crc_check_chance=1.0, gc_grace_seconds=864000, default_time_to_live=0, memtable_flush_period_in_ms=0, min_index_interval=128, max_index_interval=2048, speculative_retry=99PERCENTILE, caching={'keys' : 'ALL', 'rows_per_partition' : 'NONE'}, compaction=CompactionParams{class=org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy, options={min_threshold=4, max_threshold=32}}, compression=org.apache.cassandra.schema.CompressionParams@b18c7d2f, extensions={}, cdc=false},comparator=comparator(org.apache.cassandra.db.marshal.UTF8Type),partitionColumns=[[] | [age country gender]],partitionKeyColumns=[id],clusteringColumns=[name],keyValidator=org.apache.cassandra.db.marshal.UUIDType,columnMetadata=[name, gender, id, age, country],droppedColumns={},triggers=[],indexes=[]]
+INFO  [MigrationStage:1] 2017-03-20 14:51:00,595 ColumnFamilyStore.java:406 - Initializing demodb.employees
+INFO  [Native-Transport-Requests-1] 2017-03-20 14:51:04,844 MigrationManager.java:343 - Create new table: org.apache.cassandra.config.CFMetaData@667c84ce[cfId=a4b3c4c0-0d7c-11e7-af0e-6d2c86545d91,ksName=demodb,cfName=employees_by_country,flags=[COMPOUND],params=TableParams{comment=, read_repair_chance=0.0, dclocal_read_repair_chance=0.1, bloom_filter_fp_chance=0.01, crc_check_chance=1.0, gc_grace_seconds=864000, default_time_to_live=0, memtable_flush_period_in_ms=0, min_index_interval=128, max_index_interval=2048, speculative_retry=99PERCENTILE, caching={'keys' : 'ALL', 'rows_per_partition' : 'NONE'}, compaction=CompactionParams{class=org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy, options={min_threshold=4, max_threshold=32}}, compression=org.apache.cassandra.schema.CompressionParams@b18c7d2f, extensions={}, cdc=false},comparator=comparator(org.apache.cassandra.db.marshal.UTF8Type),partitionColumns=[[] | [age gender id]],partitionKeyColumns=[country],clusteringColumns=[name],keyValidator=org.apache.cassandra.db.marshal.UTF8Type,columnMetadata=[name, gender, id, country, age],droppedColumns={},triggers=[],indexes=[]]
+INFO  [Service Thread] 2017-03-20 14:51:05,208 GCInspector.java:284 - ParNew GC in 261ms.  CMS Old Gen: 46529312 -> 50809784; Par Eden Space: 167772160 -> 0; Par Survivor Space: 6930232 -> 8628472
+INFO  [MigrationStage:1] 2017-03-20 14:51:05,482 ColumnFamilyStore.java:406 - Initializing demodb.employees_by_country
+
+### Other Node
+
+INFO  [MigrationStage:1] 2017-03-20 14:51:00,808 ColumnFamilyStore.java:406 - Initializing demodb.employees
+INFO  [MigrationStage:1] 2017-03-20 14:51:05,091 ColumnFamilyStore.java:406 - Initializing demodb.employees_by_country
+
+# Insert column
+
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 10, '10');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 11, '11');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 12, '12');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 13, '13');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 14, '14');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 15, '15');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 16, '16');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 17, '17');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 18, '18');
+insert into employees(id, country, gender, age, name) values (uuid(), 'tw', 'male', 19, '19');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 10, '10');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 11, '11');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 12, '12');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 13, '13');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 14, '14');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 15, '15');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 16, '16');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 17, '17');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 18, '18');
+insert into employees(id, country, gender, age, name) values (uuid(), 'us', 'male', 19, '19');
+
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 10, '10');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 11, '11');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 12, '12');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 13, '13');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 14, '14');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 15, '15');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 16, '16');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 17, '17');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 18, '18');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'tw', 'male', 19, '19');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 10, '10');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 11, '11');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 12, '12');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 13, '13');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 14, '14');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 15, '15');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 16, '16');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 17, '17');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 18, '18');
+insert into employees_by_country(id, country, gender, age, name) values (uuid(), 'us', 'male', 19, '19');
+
+$ nodetool flush demodb;
+$ nodetool cfhistograms demodb.employees;
+
+Percentile  SSTables     Write Latency      Read Latency    Partition Size        Cell Count
+                              (micros)          (micros)           (bytes)
+50%             0.00             61.21              0.00                60                 3
+75%             0.00            152.32              0.00                60                 3
+95%             0.00            263.21              0.00                60                 3
+98%             0.00            263.21              0.00                60                 3
+99%             0.00            263.21              0.00                60                 3
+Min             0.00             35.43              0.00                51                 3
+Max             0.00            263.21              0.00                60                 3
+
+$ nodetool flush demodb;
+
+
+### turn off cassandra4
+
+$ nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  172.17.0.3  358.05 KiB  256          19.7%             7d4e3f6a-0217-4037-b1b5-aa5e6d2ed72e  rack1
+UN  172.17.0.2  347.99 KiB  256          19.4%             a517b2a4-48e4-4779-b242-b9011958f971  rack1
+DN  172.17.0.5  341.25 KiB  256          20.3%             5a705a90-84cf-424c-a242-9e19e6cdfd23  rack1
+UN  172.17.0.4  320.08 KiB  256          20.6%             71e3610c-6732-4d61-9363-41665fd0f83a  rack1
+UN  172.17.0.6  333.84 KiB  256          20.0%             248fefdf-a689-4f1e-87fb-47a509120e92  rack1
+
+### turn on cassandra4 turn off cassandra5
+
+operation get NoHostAvailable:
+
+$ consistency all;
+Consistency level set to ALL.
+
+$ select * from demodb.employees;
+operation get NoHostAvailable:
+
+
+
